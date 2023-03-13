@@ -1,0 +1,17 @@
+# Mac
+**/.DS_Store
+
+# Python environment
+.python-version
+.venv/
+*.pyc
+*.egg-info/
+
+# Python tools
+.cache/
+.mypy_cache/
+.pytest_cache/
+**/test-reports/
+**/coverage-reports/
+.coverage/
+
