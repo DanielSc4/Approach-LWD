@@ -7,8 +7,9 @@ class TransformerBinaryClassifier(nn.Module):
 
         self.lm = model
         self.dropout = nn.Dropout(dropout_rate)
-        self.linear = nn.Linear(768, 2)
-        self.relu = nn.ReLU()
+        # self.relu = nn.ReLU()
+        self.linear = nn.Linear(768, 1)
+        self.sigmoid = nn.Sigmoid()
 
     def forward(self, input_ids, mask,):
         _, pooled_output = self.lm(
@@ -18,6 +19,6 @@ class TransformerBinaryClassifier(nn.Module):
         )
         x = self.dropout(pooled_output)
         x = self.linear(x)
-        x = self.relu(x)
+        x = self.sigmoid(x)
 
         return x

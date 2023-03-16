@@ -1,6 +1,7 @@
 
 # imports
 from torch.utils.data import Dataset
+import numpy as np
 
 
 class CustomDatasetBinary(Dataset):
@@ -22,5 +23,5 @@ class CustomDatasetBinary(Dataset):
             'input_ids': self.text['input_ids'][idx],
             'token_type_ids': self.text['token_type_ids'][idx],
             'attention_mask': self.text['attention_mask'][idx],
-        }, self.labels[idx]
+        }, np.float32(self.labels[idx])
     

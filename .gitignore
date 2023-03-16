@@ -15,3 +15,4 @@
 **/coverage-reports/
 .coverage/
 
+src/models/checkpoint_models/
