@@ -3,6 +3,8 @@ from torch.optim import Adam
 from tqdm import tqdm
 import time
 import numpy as np
+import os
+
 
 
 def compute_acc(out: torch.Tensor, truth:torch.Tensor):
@@ -14,6 +16,8 @@ def compute_acc(out: torch.Tensor, truth:torch.Tensor):
 
 
 def train_loop(epochs, model, device, train_loader, val_loader, optimizer, criterion, log_freq, name = ''):
+    save_dir_name = 'checkpoint_models'
+
     train_losses = []
     val_losses = []
     train_accs_tot = []
@@ -114,14 +118,18 @@ def train_loop(epochs, model, device, train_loader, val_loader, optimizer, crite
             min_val_loss = loss_e
             best_model_v = model
             print('\t <-- Best epoch so far, val', end = '')
-            torch.save(model.state_dict(), f'./checkpoint_models/model_min_val_loss_{name}.pth')
+            if not os.path.exists(f'./{save_dir_name}'):
+                os.makedirs(f'./{save_dir_name}')
+            torch.save(model.state_dict(), f'./{save_dir_name}/model_min_val_loss_{name}.pth')
 
         if max_acc < acc_e:
             best_epoch_a = epoch
             max_acc = acc_e
             best_model_a = model
             print('\t <-- Best epoch so far, acc', end = '')
-            torch.save(model.state_dict(), f'./checkpoint_models/model_max_acc_{name}.pth')
+            if not os.path.exists(f'./{save_dir_name}'):
+                os.makedirs(f'./{save_dir_name}')
+            torch.save(model.state_dict(), f'./{save_dir_name}/model_max_acc_{name}.pth')
         
 
         print('\n')
@@ -140,6 +148,8 @@ def train_loop(epochs, model, device, train_loader, val_loader, optimizer, crite
         'final_model': model,
     }
 
-    torch.save(model.state_dict(), f'./checkpoint_models/model_final_{name}.pth')
+    if not os.path.exists(f'./{save_dir_name}'):
+                os.makedirs(f'./{save_dir_name}')
+    torch.save(model.state_dict(), f'./{save_dir_name}/model_final_{name}.pth')
 
     return history
