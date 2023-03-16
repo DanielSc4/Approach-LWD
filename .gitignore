@@ -16,3 +16,4 @@
 .coverage/
 
 src/models/checkpoint_models/
+src/checkpoint_models/
