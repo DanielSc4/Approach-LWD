@@ -21,7 +21,7 @@ class CustomDatasetBinary(Dataset):
     def __getitem__(self, idx):
         return {
             'input_ids': self.text['input_ids'][idx],
-            'token_type_ids': self.text['token_type_ids'][idx],
+            # 'token_type_ids': self.text['token_type_ids'][idx],
             'attention_mask': self.text['attention_mask'][idx],
         }, np.float32(self.labels[idx])
     
