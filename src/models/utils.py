@@ -15,7 +15,7 @@ def compute_acc(out: torch.Tensor, truth:torch.Tensor):
     return (out.round().flatten() == truth).sum().item() / len(out)
 
 
-def train_loop(epochs, model, device, train_loader, val_loader, optimizer, criterion, log_freq, name = ''):
+def train_loop(epochs, model, device, train_loader, val_loader, optimizer, criterion, log_freq, dtype = torch.float32, name = ''):
     save_dir_name = 'checkpoint_models'
 
     train_losses = []
@@ -23,7 +23,7 @@ def train_loop(epochs, model, device, train_loader, val_loader, optimizer, crite
     train_accs_tot = []
     val_accs_tot = []
 
-    model = model.to(device)
+    model = model.to(dtype).to(device)
 
     for epoch in range(epochs):
         print(f'-- Epoch {epoch + 1:02d} --')
