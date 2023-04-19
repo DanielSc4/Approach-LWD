@@ -64,7 +64,6 @@ def train_loop(epochs, model, device, train_loader, val_loader, optimizer, crite
             # stats
             run_loss += loss.item()
             tmp_run_loss += loss.item()
-
             train_accs += compute_acc(outputs, labels)
 
             # logging
@@ -98,8 +97,8 @@ def train_loop(epochs, model, device, train_loader, val_loader, optimizer, crite
 
             # logging
             if i % log_freq == log_freq - 1:        # print every 2000 mini-batches
-                print(f'   {epoch + 1:02d}) [eval, {i + 1:5d}] \tloss: {tmp_run_loss / log_freq:.3f}')
-                tmp_run_loss = .0
+                print(f'   {epoch + 1:02d}) [eval, {i + 1:5d}] \tloss: {tmp_eval_loss / log_freq:.3f}')
+                tmp_eval_loss = .0
         
         loss_t = run_loss / len(train_loader)
         loss_e = eval_loss / len(val_loader)

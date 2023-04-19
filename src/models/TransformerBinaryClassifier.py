@@ -17,8 +17,8 @@ class TransformerBinaryClassifier(nn.Module):
             attention_mask = mask,
             return_dict = False
         )
-        x = self.dropout(pooled_output)
-        x = self.linear(x)
+        x = self.linear(pooled_output)
+        # x = self.dropout(x)
         x = self.sigmoid(x)
 
         return x
