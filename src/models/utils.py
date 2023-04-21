@@ -148,7 +148,7 @@ def train_loop(epochs, model, device, train_loader, val_loader, optimizer, crite
     }
 
     if not os.path.exists(f'./{save_dir_name}'):
-                os.makedirs(f'./{save_dir_name}')
+        os.makedirs(f'./{save_dir_name}')
     torch.save(model.state_dict(), f'./{save_dir_name}/model_final_{name}.pth')
 
     return history
